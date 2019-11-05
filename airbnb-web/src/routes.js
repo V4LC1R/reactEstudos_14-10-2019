@@ -1,4 +1,6 @@
-import React from "react";
+import React,{Fragment} from "react";
+import { ModalContainer } from "react-router-modal";
+import "react-router-modal/css/react-router-modal.css";
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 
 import { isAuthenticated } from "./services/auth";
@@ -22,13 +24,17 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
 
 const Routes = () => (
   <BrowserRouter>
-    <Switch>
-    <Route exact path="/" component={SignIn} />
-      <Route path="/signup" component={SignUp} />
-      <PrivateRoute path="/app" component={App} />
-      <Route path="*" component={() => <h1>Page not found</h1>} />
-    </Switch>
+    <Fragment>
+      <Switch>
+        <Route exact path="/" component={SignIn} />
+        <Route path="/signup" component={SignUp} />
+        <PrivateRoute path="/app" component={App} />
+        <Route path="*" component={() => <h1>Page not found</h1>} />
+      </Switch>
+      <ModalContainer />
+    </Fragment>
   </BrowserRouter>
 );
 
 export default Routes;
+
